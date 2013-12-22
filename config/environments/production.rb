@@ -1,7 +1,7 @@
 SampleApp::Application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
 
-  # 强制在生产环境中使用SSL
+  # 强制在生产环境中使用SSL(通常显示为 http:// 的地方现在显示的是 https://，就是这个额外的“s”，证明我们正在使用 SSL。)
   config.force_ssl = true
 
   # Code is not reloaded between requests.
