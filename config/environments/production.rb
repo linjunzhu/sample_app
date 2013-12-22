@@ -1,6 +1,9 @@
 SampleApp::Application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
 
+  # 强制在生产环境中使用SSL
+  config.force_ssl = true
+
   # Code is not reloaded between requests.
   config.cache_classes = true
 
