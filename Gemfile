@@ -8,11 +8,14 @@ gem 'bcrypt-ruby', '~> 3.1.1'
 
 group :development, :test do
   gem 'sqlite3', '1.3.8'
+  # 测试框架
   gem 'rspec-rails', '2.13.1'
+  gem 'pry', require: "pry"
 end
 
 group :test do
   gem 'selenium-webdriver', '2.35.1'
+  # 可以不用开网页就能够进行测试 Capybara，这个 gem 允许我们使用类似英语中的句法编写模拟与应用程序交互的代码)
   gem 'capybara', '2.1.0'
   # 预构件 
   gem 'factory_girl_rails', '4.2.1'

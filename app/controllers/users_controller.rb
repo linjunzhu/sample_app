@@ -10,6 +10,8 @@ class UsersController < ApplicationController
   def create
     @user = User.new(create_user_params) 
     if @user.save
+      # 设置已登录状态(放入cookie)
+      sign_in @user
       # 给闪存flash添加信息
       flash[:success] = "Welcome to the Sample App!"
       redirect_to @user

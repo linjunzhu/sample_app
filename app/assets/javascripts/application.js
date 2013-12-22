@@ -10,7 +10,10 @@
 // Read Sprockets README (https://github.com/sstephenson/sprockets#sprockets-directives) for details
 // about supported directives.
 //
+// 要用到bootstrap的js代码，由Sprockets来引入文件，只需像下面这么些即可（文件本身由bootstrap sass gem提供）
 //= require jquery
 //= require jquery_ujs
 //= require turbolinks
 //= require_tree .
+//= require bootstrap
+
