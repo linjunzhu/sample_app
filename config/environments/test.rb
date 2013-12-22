@@ -33,4 +33,7 @@ SampleApp::Application.configure do
 
   # Print deprecation notices to the stderr.
   config.active_support.deprecation = :stderr
+
+  # 设置BCrypt加密密码的耗时因子为最小（这样密码强度就会低）
+  ActiveModel::SecurePassword.min_cost = true
 end

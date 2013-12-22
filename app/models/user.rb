@@ -13,6 +13,7 @@ class User < ActiveRecord::Base
 # 这些步骤本来很麻烦，不过在最新版的 Rails 中已经集成好了，只需调用一个方法就可以了，这个方法是 has_secure_password：
 # 只要数据库中有 password_digest 列，在模型文件中加入 has_secure_password 方法后就能验证用户身份了。
 # 因此是不需要在数据库中建立password,password_confirmation的，只需要password_digest就行了
+# 测试数据库（在测试中如果要跟数据库打交道，就要建立测试数据库）
   has_secure_password
   validates :password, length: { minimum: 6 }
 end

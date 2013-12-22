@@ -1,0 +1,14 @@
+
+<% provide(:title, @user.name) %>
+<div class="row">
+  <aside class="span4">
+    <section>
+      <h1>
+          <!-- 调用gravatar方法，（里面则是调用gravatar服务） -->
+
+        <%= gravatar_for @user %>
+        <%= @user.name %>
+      </h1>
+    </section>
+  </aside>
+</div>
