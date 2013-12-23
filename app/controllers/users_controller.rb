@@ -15,7 +15,9 @@ class UsersController < ApplicationController
   end
 
   def show
-    @user = User.find(params[:id])  
+    @user = User.find(params[:id]) 
+    # 加入微博对象
+    @microposts = @user.microposts.paginate(page: params[:page]) 
   end
 
   def create
@@ -60,14 +62,6 @@ class UsersController < ApplicationController
     params.require(:user).permit(:name, :email, :password, :password_confirmation)
   end
 
-  def signed_in_user
-    # notice: 相当于flash[:notice]， flash[:error]也可以，不过flash[:success]不行 
-    # redirect_to new_session_path, notice: "Please sign in." unless signed_in?
-  unless signed_in?
-    store_location
-    redirect_to new_session_path, notice: "Please sign in."
-  end
-  end
 
   def correct_user
     @user = User.find(params[:id])

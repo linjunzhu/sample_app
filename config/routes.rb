@@ -2,6 +2,8 @@ SampleApp::Application.routes.draw do
   # 这里的资源有controller就可以了，不需要model
   resources :users
   resources :sessions, only: [:new, :create, :destroy]
+  resources :microposts, only: [:create, :destroy]
+
 
   root to: 'static_pages#home'
 

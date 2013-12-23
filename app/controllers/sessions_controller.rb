@@ -7,7 +7,7 @@ class SessionsController < ApplicationController
     user = User.find_by(email: params[:session][:email].downcase)
     if user && user.authenticate(params[:session][:password])
       sign_in user
-      # 如果有存储事先的地址则访问，否则访问user（用户点了需要登录的页面，则派上用场）
+      # 如果有存储事先的地址则访问，否则访问user（用户点了需要登录的页面，则派上用场） 
       redirect_back_or user
 
       # Sign the user in and redirect to the user's show page.

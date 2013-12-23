@@ -14,6 +14,7 @@ describe "User pages" do
   describe "profile page" do
   # Replace with code to make a user variable
   # 使用预构件生成user对象
+  # let 方法指定的变量是“惰性”的，只有当后续有引用时才会被创建，let!则是立即创建
   let(:user) { FactoryGirl.create (:user) }
   before { visit user_path(user) }
 
