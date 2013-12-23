@@ -5,6 +5,12 @@ ruby '2.0.0'
 gem 'rails', '4.0.2'
 gem 'bootstrap-sass', '2.3.2.0'
 gem 'bcrypt-ruby', '~> 3.1.1'
+# 能够生成注册许多用户的工具（现在知道的就只有获取大量不同的名字而已）
+gem 'faker', '1.1.2'
+# 分页工具
+gem 'will_paginate', '3.0.4'
+# 给分页弄上bootstrap样式
+gem 'bootstrap-will_paginate', '0.0.9'
 
 group :development, :test do
   gem 'sqlite3', '1.3.8'
