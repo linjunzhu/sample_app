@@ -2,6 +2,20 @@
 class User < ActiveRecord::Base
 
   has_many :microposts, dependent: :destroy
+  has_many :relationships, foreign_key: "follower_id", dependent: :destroy
+  # 我们可以使用 :source 参数告知 Rails followed_users 数组的来源是 followed 所代表的 id 集合。
+  has_many :followed_users, through: :relationships, source: :followed
+
+  # 粉丝的关联就建立在这层反转的关系上
+  # 我们不会再建立一个完整的数据表来存放倒转后的关注关系。事实上，我们会通过被关注者和粉丝之间的对称关系来模拟一个 reverse_relationships 表，
+  # 主键设为 followed_id。也就是说，relationships 表使用 follower_id 做外键：
+  # 如果没有指定类名，Rails 会尝试寻找 ReverseRelationship 类，而这个类并不存在。
+  # 这里还不是很明白，有空研究研究下-----------------------------------------------
+  has_many :reverse_relationships, foreign_key: "followed_id",
+                                   class_name:  "Relationship",
+                                   dependent:   :destroy
+  has_many :followers, through: :reverse_relationships, source: :follower
+
   #  在保存之前把email全部转换成小写
   before_save { self.email = email.downcase }
   validates :name, presence: true
@@ -34,8 +48,21 @@ class User < ActiveRecord::Base
 
   def feed
     # This is preliminary. See "Following users" for the full implementation.
-    Micropost.where("user_id = ?", id)
+     Micropost.from_users_followed_by(self)
   end
+
+  def following?(other_user)
+    relationships.find_by(followed_id: other_user.id)
+  end
+
+  def follow!(other_user)
+    relationships.create!(followed_id: other_user.id)
+  end
+
+  def unfollow!(other_user)
+    relationships.find_by(followed_id: other_user.id).destroy
+  end
+
 
   private
     # private或protected下额再缩进一下会好点

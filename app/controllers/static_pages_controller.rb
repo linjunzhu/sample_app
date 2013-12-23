@@ -1,4 +1,6 @@
 class StaticPagesController < ApplicationController
+  before_action :signed_in_user
+
   def home
     # 微博用
     @micropost = current_user.microposts.build if signed_in?

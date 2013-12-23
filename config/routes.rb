@@ -1,9 +1,23 @@
 SampleApp::Application.routes.draw do
   # 这里的资源有controller就可以了，不需要model
-  resources :users
+
+  # 因为这两个页面都是用来显示数据的，所以我们使用了 get 方法，指定这两个地址响应的是 GET 请求。（符合 REST 架构对这种页面的要求）。
+  # 路由设置中使用的 member 方法作用是，设置这两个动作对应的 URL 地址中应该包含用户的 id
+  resources :users do
+    member do
+      get :following, :followers    # 访问这个url就会自动去查出来数据了？这里也不是很明白，要看下----------------------------
+    end
+  end
+  # 还可以使用 collection 方法，但 URL 中就没有用户 id 了，所以，如下的代码
+  # resources :users do
+  #   collection do
+  #     get :tigers
+  #   end
+  # end
+
   resources :sessions, only: [:new, :create, :destroy]
   resources :microposts, only: [:create, :destroy]
-
+  resources :relationships, only: [:create, :destroy]
 
   root to: 'static_pages#home'
 

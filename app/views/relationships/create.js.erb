@@ -1,0 +1,7 @@
+// 在处理 Ajax 请求时，Rails 会自动调用文件名和动作名一样的“含有 JavaScript 
+// 的 ERb（JavaScript Embedded Ruby）”文件（扩展名为 .js.erb），例如 create.js.erb 和 destroy.js.erb。
+// 你可能已经猜到了，这种文件是可以包含 JavaScript 和 Ruby 代码的，
+// 可以用来处理当前页面的内容。在关注用户和取消关注用户时，更新用户资料页面的内容就需要创建这种文件。
+
+$("#follow_form").html("<%= escape_javascript(render('users/unfollow')) %>")
+$("#followers").html('<%= @user.followers.count %>')

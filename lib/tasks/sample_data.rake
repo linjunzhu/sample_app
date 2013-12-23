@@ -22,12 +22,25 @@ namespace :db do
                    password: password,
                    password_confirmation: password)
     end
-    # 创建微博
-    users = User.all(limit: 6)
-    50.times do
-    content = Faker::Lorem.sentence(5)
-    users.each { |user| user.microposts.create!(content: content) }
+
+    # 定义了describe就不会执行？？有空看下------------------------------------------
+
+      # 创建微博
+      users = User.all(limit: 6)
+      50.times do
+        content = Faker::Lorem.sentence(5)
+        users.each { |user| user.microposts.create!(content: content) }
+      end
     
-    end
+
+      users = User.all
+      user  = users.first
+      followed_users = users[2..50]
+      followers      = users[3..40]
+      followed_users.each { |followed| user.follow!(followed) }
+      followers.each      { |follower| follower.follow!(user) }
+    
+
+
   end
 end
